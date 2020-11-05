@@ -11,8 +11,8 @@ public class Mole {
         System.out.println("Keep on digging!");
         Mole m = new Mole();
         m.drawWorld();
-        // m.dig();
-        m.initDig(m);
+        m.dig();
+        // m.initDig(m);
     }
 
     public void drawWorld() {

@@ -1,5 +1,5 @@
-import se.lth.cs.pt.window.SimpleWindow;
 import se.lth.cs.pt.square.Square;
+import se.lth.cs.pt.window.SimpleWindow;
 
 public class DrawSquare {
 	public static void main(String[] args) {

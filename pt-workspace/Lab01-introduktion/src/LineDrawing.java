@@ -7,12 +7,6 @@ public class LineDrawing {
 		while (true) {
 			w.waitForMouseClick();
 
-			// getMouseX och getMouseY hämtar muspositionen på hela skärmen, inte i
-			// fönstret?
-			// int x = w.getMouseY();
-			// int y = w.getMouseY();
-
-			// ? Menas getClickedX och getClickedY ?
 			int x = w.getClickedX();
 			int y = w.getClickedY();
 
