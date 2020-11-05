@@ -1,10 +1,11 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Game {
     private final int BOARD_SIZE = 3;
 
+    private Tile[][] board;
     private boolean running;
-    private Tile[][] board = new Tile[BOARD_SIZE][BOARD_SIZE];
     private Tile currentPlayer;
 
     public Game() {
@@ -12,13 +13,14 @@ public class Game {
     }
 
     private void setup() {
-        // Initialize attribures
+        // Initialize attributes
+        this.board = new Tile[BOARD_SIZE][BOARD_SIZE];
         this.running = true;
         this.currentPlayer = Tile.X;
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = Tile.EMPTY;
-            }
+
+        // Populate board-matrix
+        for (Tile[] tiles : board) {
+            Arrays.fill(tiles, Tile.EMPTY);
         }
     }
 
@@ -53,7 +55,7 @@ public class Game {
             } else {
                 this.output("\nThis spot is already taken, please try again...");
 
-                // Skip unecessary isGameOver-check because the board has not changed.
+                // Skip unnecessary isGameOver-check because the board has not changed.
                 continue;
             }
 
@@ -155,10 +157,7 @@ public class Game {
             return true;
 
         // Check diagonal right to left
-        if (this.checkRowCol(this.board[0][2], this.board[1][1], this.board[2][0]))
-            return true;
-
-        return false;
+        return this.checkRowCol(this.board[0][2], this.board[1][1], this.board[2][0]);
     }
 
     // Check if three tiles are the same

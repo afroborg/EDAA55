@@ -2,5 +2,9 @@
 cs_pt/
 bin/
 
+# IntelliJ IDEA specific files
+.idea/
+*.iml
+
 # Mac specific file
 .DS_Store
