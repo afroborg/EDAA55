@@ -23,7 +23,6 @@ public class SquareClicks {
                 sq.move((mouseX - prevX) / STEPS, (mouseY - prevY) / STEPS);
                 sq.draw(w);
             }
-
         }
     }
 }
