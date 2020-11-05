@@ -1,9 +1,9 @@
 public class Mole {
-    final int width = 30;
-    final int height = 50;
-    final int blockSize = 10;
-    final int skyHeight = 4;
-    final int grassHeight = 1;
+    private final int width = 30;
+    private final int height = 50;
+    private final int blockSize = 10;
+    private final int skyHeight = 4;
+    private final int grassHeight = 1;
 
     private Graphics g = new Graphics(width, height, blockSize);
 
@@ -26,8 +26,10 @@ public class Mole {
 
         while (true) {
             g.block(x, y, Colors.MOLE);
+
             char key = g.waitForKey();
             g.block(x, y, y == skyHeight ? Colors.GRASS : Colors.TUNNEL);
+
             switch (key) {
                 case 'w':
                     if (y > skyHeight)
@@ -56,35 +58,23 @@ public class Mole {
 
     // Recursive instead of while(true)
     public void digRecursive(int x, int y) {
-        if (x < 0) {
-            digRecursive(0, y);
-        }
-        if (y < skyHeight) {
-            digRecursive(x, skyHeight);
-        }
-        if (x > width - 1) {
-            digRecursive(width - 1, y);
-        }
-        if (y > height - 1) {
-            digRecursive(x, height - 1);
-        }
-
         g.block(x, y, Colors.MOLE);
 
         char key = g.waitForKey();
         g.block(x, y, y == skyHeight ? Colors.GRASS : Colors.TUNNEL);
+
         switch (key) {
             case 'w':
-                digRecursive(x, y - 1);
+                digRecursive(x, y > skyHeight ? y - 1 : y);
                 break;
             case 'a':
-                digRecursive(x - 1, y);
+                digRecursive(x > 0 ? x - 1 : x, y);
                 break;
             case 's':
-                digRecursive(x, y + 1);
+                digRecursive(x, y < height - 1 ? y + 1 : y);
                 break;
             case 'd':
-                digRecursive(x + 1, y);
+                digRecursive(x < width - 1 ? x + 1 : x, y);
                 break;
         }
 
