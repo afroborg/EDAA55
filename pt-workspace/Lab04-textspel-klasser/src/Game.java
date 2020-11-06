@@ -115,10 +115,10 @@ public class Game {
                 // Check value of tile in matrix and add that value to output string
                 switch (this.board[i][j]) {
                     case X:
-                        row.append(" ❌");
+                        row.append(" x ");
                         break;
                     case O:
-                        row.append(" ⚪️");
+                        row.append(" o ");
                         break;
                     case EMPTY:
                         row.append("   ");
