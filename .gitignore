@@ -1,6 +1,7 @@
 .metadata/
 cs_pt/
 bin/
+*.ans.md
 
 # IntelliJ IDEA specific files
 .idea/
