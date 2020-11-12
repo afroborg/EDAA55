@@ -1,6 +1,6 @@
-import se.lth.cs.pt.window.SimpleWindow;
-
 import java.util.Random;
+
+import se.lth.cs.pt.window.SimpleWindow;
 
 public class Turtle5 {
     public static void main(String[] args) {
