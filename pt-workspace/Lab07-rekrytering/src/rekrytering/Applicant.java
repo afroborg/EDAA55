@@ -1,7 +1,7 @@
 package rekrytering;
 
 public class Applicant implements Comparable<Applicant> {
-	//Varje sökande har ett namn och ett antal betyg
+	// Varje sökande har ett namn och ett antal betyg
 	private String name;
 	private int[] grades;
 
@@ -25,26 +25,45 @@ public class Applicant implements Comparable<Applicant> {
 				// Om underkänd så räknar vi det som en nolla
 				grades[i] = 0;
 			} else {
-				grades[i] = Integer.parseInt(g[i]);
+				try {
+					grades[i] = Integer.parseInt(g[i]);
+				}
+
+				catch (Exception e) {
+					grades[i] = 0;
+				}
 			}
 		}
 	}
 
 	public double getAvgGrade() {
-		return 0; 
+		int total = 0;
+		for (int g : this.grades) {
+			total += g;
+		}
+		return total / this.grades.length;
+	}
+
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append(this.name + "[");
+		int total = 0;
+		for (int i = 0; i < this.grades.length; i++) {
+			int g = this.grades[i];
+			str.append(g + (i == this.grades.length - 1 ? "" : ","));
+			total += g;
+		}
+
+		str.append("](avg: " + total / this.grades.length + ")");
+
+		return str.toString();
 	}
 
 	/*
-	  Implementera denna när labbeskrivningen kräver det 
-	  public String toString() {
-	      //Fyll i kod här 
-	  }
-	 */
-
-	/*
 	 * Metod för att jämföra detta Applicant-objekt med ett annat och få ut vilket
-	 * som är störst. Retunerar något > 0 om detta objektet är störst. Returnerar något < 0 om other är störst och returnerar 0 om objekten är lika.
-	 * Används av javas inbyggda sorteringsmetoder
+	 * som är störst. Retunerar något > 0 om detta objektet är störst. Returnerar
+	 * något < 0 om other är störst och returnerar 0 om objekten är lika. Används av
+	 * javas inbyggda sorteringsmetoder
 	 */
 	public int compareTo(Applicant other) {
 		// Om exakt samma objekt

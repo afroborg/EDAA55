@@ -3,5 +3,5 @@ Rasmus Andreasson 5,5,5,5,-1 //Har inte alls löst sista kursen men har pga utla
 Rut Andreasson 5,5,5,4,3 //Briljerat i början, men inte klarat de svårare momenten
 Bosse Larsson 3,4,5,5,5 //Tyckte det var svårt när ämnet var nytt men har sen greppat hela sammanhanget och arbetat sig upp till djup förståelse
 Alice Abrahamsson 5,5,3,5,5 //Toppstudent som gick igenom en svår kris privat under en termin. Lyckades trots detta nå godkänt
-Sandra Nilsson 5,5,5 //Hoppat av programmet? 
-Per Persson 3,U,3,44,3 //Skrivfel?
+Sandra Nilsson 5,5,5 //Hoppat av programmet?
+Per Persson 3,U,3,44,3 //Skrivfel? // Max-längd av inläsning 1 siffra
