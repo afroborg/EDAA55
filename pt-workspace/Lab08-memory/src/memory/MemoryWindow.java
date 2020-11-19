@@ -16,8 +16,7 @@ public class MemoryWindow extends SimpleWindow {
 	}
 
 	/**
-	 * Ritar brädet med alla kort. Raderna och kolonnerna numreras från 0 och
-	 * uppåt.
+	 * Ritar brädet med alla kort. Raderna och kolonnerna numreras från 0 och uppåt.
 	 */
 	public void drawBoard() {
 		for (int r = 0; r < board.getSize(); r++) {
@@ -36,7 +35,7 @@ public class MemoryWindow extends SimpleWindow {
 		if (board.frontUp(r, c)) {
 			getAdvancedControls().drawImage(card.getFront().getScaledInstance(imgSize, imgSize, Image.SCALE_SMOOTH));
 		} else {
-		    getAdvancedControls().drawImage(card.getBack().getScaledInstance(imgSize, imgSize, Image.SCALE_SMOOTH));
+			getAdvancedControls().drawImage(card.getBack().getScaledInstance(imgSize, imgSize, Image.SCALE_SMOOTH));
 		}
 		moveTo(x0, y0);
 		lineTo(x0 + imgSize, y0);
