@@ -25,7 +25,7 @@ public class FileReader {
 		int row = 0;
 		Applicant[] apps = new Applicant[nbrOfRows];
 
-		while (scan.hasNextLine() && row <= nbrOfRows) {
+		while (scan.hasNextLine() && row < nbrOfRows) {
 			String rowData = scan.nextLine();
 
 			String[] splitRow = rowData.split(" ");

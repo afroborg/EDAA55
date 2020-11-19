@@ -10,7 +10,7 @@ public class FindBestCandidates {
 		// Läs från fil (Börja med "applications_small.txt), spara resultatet i en
 		// vektor
 		Applicant[] apps = FileReader.readFromFile(
-				System.getProperty("user.dir") + "/pt-workspace/Lab07-rekrytering/applications_all.txt", 9999);
+				System.getProperty("user.dir") + "/pt-workspace/Lab07-rekrytering/applications_all.txt", 6);
 
 		// Skicka in Applicant-vektorn (som du fick i föregående steg) till metoden
 		// findBestCandidiates (nedan)
