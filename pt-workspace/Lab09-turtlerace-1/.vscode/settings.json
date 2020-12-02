@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/axelfroborg/Documents/LTH/Programmeringsteknik - EDAA55/pt-workspace/cs_pt/cs_pt.jar",
+        "/Users/axelfroborg/Documents/LTH/Programmeringsteknik - EDAA55/pt-workspace/Lab05-turtle/**/*.jar"
+    ]
+}
