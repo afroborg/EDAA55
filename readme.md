@@ -19,6 +19,6 @@
 - [x] Lab 6
 - [x] Lab 7
 - [x] Lab 8
-- [ ] Lab 9
-- [ ] Lab 10
+- [x] Lab 9
+- [x] Lab 10
 - [ ] Project

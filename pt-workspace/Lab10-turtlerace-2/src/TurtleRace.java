@@ -16,7 +16,6 @@ public class TurtleRace {
 					t = new MoleTurtle(w, i);
 					break;
 				case 1:
-
 					t = new AbsentMindedTurtle(w, i);
 					break;
 				case 2:
@@ -30,7 +29,6 @@ public class TurtleRace {
 
 			racingTurtles.add(t);
 			System.out.println(t);
-
 		}
 
 		// Loop until all racing turtles are done

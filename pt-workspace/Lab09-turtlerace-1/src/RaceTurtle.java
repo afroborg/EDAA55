@@ -8,12 +8,8 @@ public class RaceTurtle extends Turtle {
 		this.nbr = nbr;
 		this.penDown();
 
-		/*
-		 * Måste ändra direction så att den springer åt höger, Hur gör jag det på ett
-		 * bättre sätt än att sätta protected och ändra?
-		 */
-
-		this.direction = 0;
+		// New method on turtle-class so that we can set a new direction
+		this.setDirection(0);
 	}
 
 	public void raceStep() {

@@ -7,8 +7,8 @@ public class Turtle {
 	private double x; // * Attribut, används i ctor, forward, getX, jumpTo osv.
 	private double y;
 	// Degree from north that the turtle is facing
-	protected double direction;
-	
+	private double direction;
+
 	private boolean isPenDown;
 
 	/**
@@ -90,8 +90,12 @@ public class Turtle {
 	public int getDirection() {
 		return (int) Math.toDegrees(this.direction);
 	}
-	
+
 	public boolean isDrawing() {
 		return this.isPenDown;
+	}
+
+	public void setDirection(int deg) {
+		this.direction = Math.toRadians(deg);
 	}
 }

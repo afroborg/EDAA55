@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class MoleTurtle extends RaceTurtle {
 
 	public MoleTurtle(RaceWindow w, int nbr) {
@@ -7,12 +5,8 @@ public class MoleTurtle extends RaceTurtle {
 	}
 
 	public void raceStep() {
-		Random rand = new Random();
-		if (rand.nextBoolean()) {
-
-			/*
-			 * Samma sak här, isPenDown måste man ha access till
-			 */
+		if (this.randomBool()) {
+			// Checking if the pen is up or down
 			if (this.isDrawing()) {
 				this.penUp();
 			} else {
@@ -22,7 +16,7 @@ public class MoleTurtle extends RaceTurtle {
 
 		super.raceStep();
 	}
-	
+
 	public String toString() {
 		return super.toString() + " - MoleTurtle";
 	}
