@@ -2,9 +2,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class BankApplication {
-    Bank bank;
-    Scanner scan;
-    Random rand;
+    private Bank bank;
+    private Scanner scan;
+    private Random rand;
 
     public static void main(String[] args) {
         // Start the entire program
@@ -16,9 +16,6 @@ public class BankApplication {
         this.bank = new Bank();
         this.scan = new Scanner(System.in);
         this.rand = new Random();
-
-        // TODO: Remove this when done
-        this.seedAccounts();
 
         this.run();
 
@@ -38,14 +35,23 @@ public class BankApplication {
             case 3: // Deposit
                 this.deposit();
                 break;
+            case 4: // Withdraw
+                this.withdraw();
+                break;
+            case 5: // Transfer
+                this.transfer();
+                break;
             case 6: // Create new account
                 this.createAccount();
+                break;
+            case 7: // Delete account
+                this.deleteAccount();
                 break;
             case 8: // Print all accounts
                 this.printAccounts();
                 break;
             case 9: // Close
-                this._print("Hejdå! :(");
+                this._print("Hejdå!\n");
                 return;
         }
 
@@ -109,8 +115,19 @@ public class BankApplication {
             this._print("Kontonummer är ej korrekt, ett slumpmässigt har genererats: " + id);
         }
 
-        this.bank.addAccount(name, id);
-        this._print("Bankkonto " + id + " skapat för " + name);
+        var accountNr = this.bank.addAccount(name, id);
+        this._print("konto skapat: " + accountNr);
+
+    }
+
+    private void deleteAccount() {
+        var accountNr = this._waitForInputI("kontonummer");
+
+        if (!this.bank.removeAccount(accountNr)) {
+            this._print("Felaktigt kontonummer!");
+        } else {
+            this._print("Kontot har tagits bort.");
+        }
 
     }
 
@@ -127,7 +144,7 @@ public class BankApplication {
     }
 
     private void findAccountForHolder() {
-        var id = this._waitForInputL("Sök kund");
+        var id = this._waitForInputL("Sök kundnummer");
 
         var found = this.bank.findAccountsForHolder(id);
         var length = found.size();
@@ -135,7 +152,7 @@ public class BankApplication {
         if (length > 0) {
             for (int i = 0; i < length; i++) {
                 var acc = found.get(i);
-                this._print("konto " + acc.getAccountNumber() + "");
+                this._print(acc);
             }
         } else {
             this._print("No results found.");
@@ -147,7 +164,10 @@ public class BankApplication {
 
         var searchResults = bank.findByPartofName(searchTerm);
 
-        searchResults.forEach(s -> this._print(s));
+        if (searchResults.size() == 0)
+            this._print("Inga resultat hittades");
+        else
+            searchResults.forEach(s -> this._print(s));
 
     }
 
@@ -156,14 +176,74 @@ public class BankApplication {
         var account = this.bank.findByNumber(accountNbr);
 
         if (account == null) {
-            this._print("Account not found");
+            this._print("Kontot finns inte");
             return;
         }
 
-        var amount = this._waitForInputL("Hur mycket vill du sätta in? ");
+        long amount = this._getAmount(account.getAmount(), false);
+
         account.deposit(amount);
 
         this._print(account);
+    }
+
+    private void withdraw() {
+        int accountNbr = this._waitForInputI("konto");
+        var account = this.bank.findByNumber(accountNbr);
+
+        if (account == null) {
+            this._print("Kontot finns inte");
+            return;
+        }
+
+        long amount = this._getAmount(account.getAmount(), true);
+
+        account.withdraw(amount);
+
+        this._print(account);
+    }
+
+    private void transfer() {
+        int fromAccountNbr = this._waitForInputI("från");
+        int toAccountNbr = this._waitForInputI("till");
+
+        var fromAccount = this.bank.findByNumber(fromAccountNbr);
+
+        if (fromAccount == null) {
+            this._print("Kontot finns inte");
+            return;
+        }
+
+        long amount = this._getAmount(fromAccount.getAmount(), true);
+
+        fromAccount.withdraw(amount);
+
+        var toAccount = this.bank.findByNumber(toAccountNbr);
+
+        if (toAccount == null) {
+            this._print("Kontot finns inte");
+            return;
+        }
+
+        toAccount.deposit(amount);
+
+        this._print(fromAccount);
+        this._print(toAccount);
+    }
+
+    private long _getAmount(double currentAmount, Boolean checkAgainstCurrent) {
+        long amount = this._waitForInputL("Belopp");
+        if (amount < 0) {
+            this._print("Beloppet kan ej vara mindre än 0");
+            return this._getAmount(currentAmount, checkAgainstCurrent);
+        }
+
+        if (checkAgainstCurrent && amount > currentAmount) {
+            this._print("Finns inte tillräckligt med täckning.");
+            return this._getAmount(currentAmount, checkAgainstCurrent);
+        }
+
+        return amount;
     }
 
     private void _print(Object s) {
@@ -175,15 +255,24 @@ public class BankApplication {
             System.out.print(label + ": ");
         }
 
-        return scan.next();
+        var input = scan.nextLine();
+
+        return input;
     }
 
     private int _waitForInputI(String label) {
         if (label != "") {
             System.out.print(label + ": ");
         }
-
-        return scan.nextInt();
+        int input;
+        try {
+            input = scan.nextInt();
+        } catch (Exception e) {
+            scan.nextLine();
+            return this._waitForInputI(label);
+        }
+        scan.nextLine();
+        return input;
     }
 
     private long _waitForInputL(String label) {
@@ -191,7 +280,14 @@ public class BankApplication {
             System.out.print(label + ": ");
         }
 
-        return scan.nextLong();
+        long input;
+        try {
+            input = scan.nextLong();
+        } catch (Exception e) {
+            input = -1;
+        }
+        scan.nextLine();
+        return input;
     }
 
 }

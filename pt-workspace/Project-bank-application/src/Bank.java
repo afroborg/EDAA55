@@ -14,6 +14,15 @@ public class Bank {
      * befintliga användas. Det nya kontonumret returneras.
      */
     public int addAccount(String holderName, long idNr) {
+        for (BankAccount account : this.accounts) {
+            var holder = account.getHolder();
+            if (holder.getIdNr() == idNr) {
+                BankAccount newAccount = new BankAccount(holder);
+                this.accounts.add(newAccount);
+                return newAccount.getAccountNumber();
+            }
+        }
+
         BankAccount newAccount = new BankAccount(holderName, idNr);
         this.accounts.add(newAccount);
 
@@ -53,9 +62,34 @@ public class Bank {
      * sorterad på kontoinnehavarnas namn.
      */
 
-    // TODO: Add the boring sorting logic
+    // // TODO: Add the boring sorting logic
     public ArrayList<BankAccount> getAllAccounts() {
-        return this.accounts;
+        if (this.accounts.size() < 1) {
+            return this.accounts;
+        }
+
+        ArrayList<BankAccount> sorted = new ArrayList<BankAccount>();
+
+        for (BankAccount a : this.accounts) {
+            sorted.add(a);
+        }
+
+        // Loop through array
+        for (int i = 0; i < sorted.size(); i++) {
+            // Start at next item in array
+            for (int j = i + 1; j < sorted.size(); j++) {
+                BankAccount a1 = sorted.get(i);
+                BankAccount a2 = sorted.get(j);
+
+                // Check if name should be sorted higher and swap their locations
+                if (a1.getHolder().getName().compareToIgnoreCase(a2.getHolder().getName()) > 0) {
+                    sorted.set(i, a2);
+                    sorted.set(j, a1);
+                }
+            }
+        }
+
+        return sorted;
     }
 
     /**

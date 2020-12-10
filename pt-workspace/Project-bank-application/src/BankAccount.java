@@ -2,6 +2,7 @@ public class BankAccount {
     private Customer holder;
     private double balance;
     private int accountNbr;
+    private static int nextAccountNbr = 1000;
 
     /**
      * Skapar ett nytt bankkonto åt en innehavare med namn ’holderName’ och id
@@ -11,6 +12,9 @@ public class BankAccount {
     public BankAccount(String holderName, long holderId) {
         this.holder = new Customer(holderName, holderId);
         this.balance = 0;
+        accountNbr = nextAccountNbr;
+
+        nextAccountNbr++;
     }
 
     /**
@@ -18,7 +22,11 @@ public class BankAccount {
      * kontonummer och innehåller inledningsvis 0 kr.
      */
     public BankAccount(Customer holder) {
+        this.holder = holder;
         this.balance = 0;
+        accountNbr = nextAccountNbr;
+
+        nextAccountNbr++;
     }
 
     /** Tar reda på kontots innehavare. */
@@ -51,6 +59,8 @@ public class BankAccount {
 
     /** Returnerar en strängrepresentation av bankkontot. */
     public String toString() {
-        return this.holder.getName() + ", id " + this.accountNbr + ", kundnr " + this.holder.getIdNr();
+        var holder = this.getHolder();
+        return "konto " + this.accountNbr + " (" + holder.getName() + ", id " + holder.getIdNr() + ", kundnr "
+                + holder.getCustomerNr() + "): " + this.getAmount();
     }
 }
